@@ -1,19 +1,114 @@
-Claro! Abaixo está uma descrição narrativa detalhada com base no fluxograma que você compartilhou. Ela descreve o funcionamento do sistema de controle de medicamentos de forma clara, como se fosse o roteiro de uso do sistema:
+import time
 
-⸻
+medicamentos = []
 
-🧾 Descrição Narrativa do Fluxograma de Controle de Medicamentos
+def menu():
+    while True:
+        print("\n==== MENU PRINCIPAL ====")
+        print("1 - Adicionar novo medicamento")
+        print("2 - Ver lista de medicamentos")
+        print("3 - Excluir medicamento")
+        print("4 - Sair")
+        opcao = input("Escolha uma opção: ")
 
-Ao iniciar o sistema, o usuário é apresentado a um menu principal com três opções:
+        if opcao == "1":
+            adicionar_medicamento()
+        elif opcao == "2":
+            listar_medicamentos()
+        elif opcao == "3":
+            excluir_medicamento()
+        elif opcao == "4":
+            print("Encerrando o sistema. Até logo!")
+            break
+        else:
+            print("Opção inválida.")
 
-🔹 Opção 1: Adicionar novo medicamento
+def validar_horario(horario):
+    try:
+        h, m = map(int, horario.split(":"))
+        return 0 <= h < 24 and 0 <= m < 60
+    except:
+        return False
 
-Ao escolher essa opção, o usuário inicia o cadastro de um medicamento, informando:
-	1.	O nome do remédio.
-	2.	O horário em que ele deve ser tomado.
-	•	Se o horário informado estiver fora do formato de 24h, o sistema exibe uma mensagem pedindo para inserir um horário válido.
-	3.	A frequência com que o medicamento deve ser tomado.
-	4.	A dose a ser administrada.
+def adicionar_medicamento():
+    while True:
+        nome = input("Nome do medicamento: ").strip()
+        horario = input("Horário a ser tomado (HH:MM): ").strip()
+        while not validar_horario(horario):
+            print("⛔ Horário inválido. Insira um horário dentro de 24h (ex: 14:30)")
+            horario = input("Horário a ser tomado (HH:MM): ").strip()
+
+        frequencia = input("Frequência (ex: 1x ao dia, de 8 em 8h): ").strip()
+        dose = input("Dose a ser tomada: ").strip()
+
+        medicamentos.append({
+            "nome": nome,
+            "horario": horario,
+            "frequencia": frequencia,
+            "dose": dose,
+            "status": "pendente"
+        })
+
+        print(f"✅ Medicamento '{nome}' adicionado com sucesso!")
+        mais = input("Deseja adicionar outro medicamento? (s/n): ").strip().lower()
+        if mais != 's':
+            break
+
+def listar_medicamentos():
+    if not medicamentos:
+        print("📭 Nenhum medicamento cadastrado.")
+        return
+
+    print("\n📋 Lista de medicamentos:")
+    for i, med in enumerate(medicamentos, 1):
+        print(f"{i}. {med['nome']} - {med['horario']} - {med['frequencia']} - Dose: {med['dose']} - Status: {med['status']}")
+
+    escolha = input("\nDeseja visualizar um medicamento específico? (s/n): ").strip().lower()
+    if escolha == 's':
+        nome = input("Digite o nome do medicamento: ").strip()
+        encontrado = False
+        for med in medicamentos:
+            if med['nome'].lower() == nome.lower():
+                print(f"\n🔍 Informações de '{nome}':")
+                print(f"Horário: {med['horario']}")
+                print(f"Frequência: {med['frequencia']}")
+                print(f"Dose: {med['dose']}")
+                print(f"Status: {med['status']}")
+                encontrado = True
+                break
+        if not encontrado:
+            print("⛔ Medicamento não encontrado.")
+
+    pendentes = input("Deseja ver quais remédios faltam tomar? (s/n): ").strip().lower()
+    if pendentes == 's':
+        print("\n⏳ Medicamentos pendentes:")
+        for med in medicamentos:
+            if med['status'] == "pendente":
+                print(f"- {med['nome']}")
+
+    tomados = input("Deseja ver quais remédios já foram tomados? (s/n): ").strip().lower()
+    if tomados == 's':
+        print("\n✅ Medicamentos já tomados:")
+        for med in medicamentos:
+            if med['status'] == "tomado":
+                print(f"- {med['nome']}")
+
+def excluir_medicamento():
+    nome = input("Digite o nome do medicamento que deseja excluir: ").strip()
+    for med in medicamentos:
+        if med['nome'].lower() == nome.lower():
+            certeza = input(f"Tem certeza que deseja excluir '{nome}'? (s/n): ").strip().lower()
+            if certeza == 's':
+                medicamentos.remove(med)
+                print("🗑️ Medicamento excluído com sucesso!")
+            else:
+                print("❌ Exclusão cancelada.")
+            return
+    print("⛔ Medicamento não encontrado.")
+
+# Iniciar o programa
+menu()
+
 
 Após esses dados, o medicamento é adicionado com sucesso.
 O sistema então pergunta se o usuário deseja adicionar outro medicamento.
@@ -42,24 +137,7 @@ Além disso, o sistema permite:
 
 🔹 Opção 3: Excluir medicamento
 
-Ao escolher essa opção:
-	1.	O usuário digita o nome do medicamento que deseja excluir.
-	2.	O sistema verifica se o medicamento está entre os já adicionados.
-	•	Se não estiver, o sistema pede que o usuário insira um nome válido.
-	3.	Caso o medicamento esteja na lista:
-	•	O sistema pergunta se o usuário tem certeza que deseja excluí-lo.
-	•	Se sim, o medicamento é excluído com sucesso.
-	•	Se não, a exclusão é cancelada, e o usuário retorna ao menu principal.
-
-⸻
-
-🧠 Observações:
-	•	O sistema se preocupa com validações, como garantir horários válidos e confirmar exclusões antes de apagar dados.
-	•	Ele também oferece flexibilidade ao usuário: é possível consultar dados de forma geral ou específica, além de adicionar quantos medicamentos forem necessários.
-
-⸻
-
-Se quiser, posso te ajudar a transformar esse fluxo em um programa real em Python com interface gráfica (usando customtkinter), ou em uma versão simples de terminal. Deseja isso?
+Ao fluxo em um programa real em Python com interface gráfica (usando customtkinter), ou em uma versão simples de terminal. Deseja isso?
 
 
 import customtkinter as ctk
