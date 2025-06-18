@@ -1,3 +1,67 @@
+Claro! Abaixo está uma descrição narrativa detalhada com base no fluxograma que você compartilhou. Ela descreve o funcionamento do sistema de controle de medicamentos de forma clara, como se fosse o roteiro de uso do sistema:
+
+⸻
+
+🧾 Descrição Narrativa do Fluxograma de Controle de Medicamentos
+
+Ao iniciar o sistema, o usuário é apresentado a um menu principal com três opções:
+
+🔹 Opção 1: Adicionar novo medicamento
+
+Ao escolher essa opção, o usuário inicia o cadastro de um medicamento, informando:
+	1.	O nome do remédio.
+	2.	O horário em que ele deve ser tomado.
+	•	Se o horário informado estiver fora do formato de 24h, o sistema exibe uma mensagem pedindo para inserir um horário válido.
+	3.	A frequência com que o medicamento deve ser tomado.
+	4.	A dose a ser administrada.
+
+Após esses dados, o medicamento é adicionado com sucesso.
+O sistema então pergunta se o usuário deseja adicionar outro medicamento.
+	•	Se sim, o processo se repete.
+	•	Se não, o sistema retorna ao menu principal.
+
+⸻
+
+🔹 Opção 2: Ver lista de medicamentos
+
+Aqui, o sistema exibe todos os medicamentos já adicionados e pergunta:
+
+“Deseja visualizar algum medicamento específico?”
+
+	•	Se o usuário desejar:
+	1.	Ele digita o nome do medicamento.
+	2.	O sistema verifica se ele está na lista.
+	•	Se sim, as informações do medicamento são exibidas.
+	•	Se não, o sistema informa que o medicamento não foi encontrado e pede para inserir um nome válido.
+
+Além disso, o sistema permite:
+	•	Verificar quais medicamentos ainda precisam ser tomados.
+	•	Verificar quais medicamentos já foram tomados.
+
+⸻
+
+🔹 Opção 3: Excluir medicamento
+
+Ao escolher essa opção:
+	1.	O usuário digita o nome do medicamento que deseja excluir.
+	2.	O sistema verifica se o medicamento está entre os já adicionados.
+	•	Se não estiver, o sistema pede que o usuário insira um nome válido.
+	3.	Caso o medicamento esteja na lista:
+	•	O sistema pergunta se o usuário tem certeza que deseja excluí-lo.
+	•	Se sim, o medicamento é excluído com sucesso.
+	•	Se não, a exclusão é cancelada, e o usuário retorna ao menu principal.
+
+⸻
+
+🧠 Observações:
+	•	O sistema se preocupa com validações, como garantir horários válidos e confirmar exclusões antes de apagar dados.
+	•	Ele também oferece flexibilidade ao usuário: é possível consultar dados de forma geral ou específica, além de adicionar quantos medicamentos forem necessários.
+
+⸻
+
+Se quiser, posso te ajudar a transformar esse fluxo em um programa real em Python com interface gráfica (usando customtkinter), ou em uma versão simples de terminal. Deseja isso?
+
+
 import customtkinter as ctk
 from tkinter import messagebox
 
