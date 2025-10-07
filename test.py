@@ -39,7 +39,7 @@ def adicionar_medicamento():
         nome = input("Nome do medicamento: ").strip()
         horario = input("Horário a ser tomado (HH:MM): ").strip()
         while not validar_horario(horario):
-            print("⛔ Horário inválido. Use o formato 24h (ex: 14:30)")
+            print("Horário inválido. Use o formato 24h (ex: 14:30)")
             horario = input("Horário a ser tomado (HH:MM): ").strip()
 
         frequencia = input("Frequência (ex: 1x ao dia, de 8 em 8h): ").strip()
@@ -54,7 +54,7 @@ def adicionar_medicamento():
         })
 
         salvar_dados()
-        print(f"✅ Medicamento '{nome}' adicionado com sucesso!")
+        print(f"Medicamento '{nome}' adicionado com sucesso!")
         mais = input("Deseja adicionar outro medicamento? (s/n): ").strip().lower()
         if mais != 's':
             break
@@ -74,7 +74,7 @@ def listar_medicamentos():
         encontrado = False
         for med in medicamentos:
             if med['nome'].lower() == nome.lower():
-                print(f"\n🔍 Informações de '{nome}':")
+                print(f"\n Informações de '{nome}':")
                 print(f"Horário: {med['horario']}")
                 print(f"Frequência: {med['frequencia']}")
                 print(f"Dose: {med['dose']}")
@@ -82,7 +82,7 @@ def listar_medicamentos():
                 encontrado = True
                 break
         if not encontrado:
-            print("⛔ Medicamento não encontrado.")
+            print(" Medicamento não encontrado.")
 
     pendentes = input("Deseja ver quais remédios faltam tomar? (s/n): ").strip().lower()
     if pendentes == 's':
@@ -93,7 +93,7 @@ def listar_medicamentos():
 
     tomados = input("Deseja ver quais remédios já foram tomados? (s/n): ").strip().lower()
     if tomados == 's':
-        print("\n✅ Medicamentos já tomados:")
+        print("\nMedicamentos já tomados:")
         for med in medicamentos:
             if med['status'] == "tomado":
                 print(f"- {med['nome']}")
@@ -106,11 +106,11 @@ def excluir_medicamento():
             if certeza == 's':
                 medicamentos.remove(med)
                 salvar_dados()
-                print("🗑️ Medicamento excluído com sucesso!")
+                print("Medicamento excluído com sucesso!")
             else:
-                print("❌ Exclusão cancelada.")
+                print("Exclusão cancelada.")
             return
-    print("⛔ Medicamento não encontrado.")
+    print("Medicamento não encontrado.")
 
 def menu():
     while True:
